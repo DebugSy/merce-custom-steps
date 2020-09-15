@@ -68,6 +68,40 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>installjar</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <version>2.5.2</version>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>install-shc</id>
+                                <phase>validate</phase>
+                                <configuration>
+                                    <file>${basedir}/lib/woven-dataflow-step-sdk-3.1.jar</file>
+                                    <repositoryLayout>default</repositoryLayout>
+                                    <groupId>com.merce.woven</groupId>
+                                    <artifactId>woven-dataflow-step-sdk</artifactId>
+                                    <version>3.1</version>
+                                    <packaging>jar</packaging>
+                                    <generatePom>true</generatePom>
+                                </configuration>
+                                <goals>
+                                    <goal>install-file</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
