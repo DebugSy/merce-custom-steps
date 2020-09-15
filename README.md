@@ -18,16 +18,17 @@
   - order 参数排序，可调整显示的顺序
   - values 可选择的值，前端会显示成下拉框
   - select 该参数表明值的选择来源，即从何处选择
-        
-        select值 | 含义
-        ---|---
-        INPUT | 从INPUT中选择
-        LEFT | 从LEFT中选择，如join step分左右输入的
-        RIGHT | 从RIGHT中选择，如join step分左右输入的
-        DATASET | 从数据集Dataset中选择
-        SCHEMA | 从元数据Schema中选择
-        ID | 从输入的多个ID中选择
-        NULL | 不选择任何东西（默认值）
+    
+       selectType值 | 含义
+       ---|---
+       INPUT | 从INPUT中选择
+       LEFT | 从LEFT中选择，如join step分左右输入的
+       RIGHT | 从RIGHT中选择，如join step分左右输入的
+       DATASET | 从数据集Dataset中选择
+       SCHEMA | 从元数据Schema中选择
+       ID | 从输入的多个ID中选择
+       NULL | 不选择任何东西（默认值）
+       
   - selectType 该参数表明选择类型,即选择什么数据
     
        selectType值 | 含义
