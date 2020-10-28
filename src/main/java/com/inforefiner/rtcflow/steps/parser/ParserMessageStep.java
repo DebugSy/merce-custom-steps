@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.types.Row;
 
-@StepBind(id = "rtc_parserMessage", settingClass = ParserMessageSettings.class)
+@StepBind(id = "rtc_parserMessage", StepSetting = ParserMessageSettings.class, type = "rtc_parserMessage")
 public class ParserMessageStep extends Step<ParserMessageSettings, DataStream<Row>> {
 
     private SchemaMiniDesc schema;

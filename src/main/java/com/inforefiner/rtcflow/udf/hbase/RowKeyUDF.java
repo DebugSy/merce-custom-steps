@@ -79,22 +79,6 @@ public class RowKeyUDF extends ScalarFunction {
         }
     }
 
-    /**
-     * @param tabNameEn
-     * @param time
-     */
-    public void eval(String tabNameEn, Date time) {
-
-        try {
-
-            //获取表名方法调用
-            HbaseTableDTO hbaseTableDTO = RowKeyBuild.getInstance(wsEntity).getHTableInfo(tabNameEn, time);
-
-        } catch (RowKeyException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void close() throws Exception {
 
