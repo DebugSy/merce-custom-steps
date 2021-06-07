@@ -17,7 +17,7 @@ import org.apache.flink.types.Row;
 import java.util.HashMap;
 import java.util.Map;
 
-@StepBind(id = "custom_hbase_sink", StepSetting = HBaseCustomSinkSettings.class, type = "custom_hbase_sink")
+@StepBind(id = "custom_hbase_sink", settingClass = HBaseCustomSinkSettings.class)
 public class HBaseCustomSinkStep extends Step<HBaseCustomSinkSettings, DataStream<Row>> {
 
     private String tableColumn;

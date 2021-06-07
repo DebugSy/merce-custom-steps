@@ -15,7 +15,7 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.types.Row;
 
-@StepBind(id = "rtc_filter", StepSetting = FilterSettings.class, type = "rtc_filter")
+@StepBind(id = "rtc_filter", settingClass = FilterSettings.class)
 public class FilterStep extends Step<FilterSettings, DataStream<Row>> {
 
     private int keyIndex;
