@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>merce-custom-steps</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
 
     <properties>
         <flink.version>1.10.1</flink.version>

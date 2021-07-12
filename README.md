@@ -40,6 +40,9 @@
        UDF | 选择一个已注册的UDF
        NULL | 不选择任何东西（默认值）
 
+- @SettingsContainer 标识这是一个参数容器，即包括嵌套的参数配置，如aggregate step的aggregates参数
+  具体实例请看SQLStep
+
 ## 自定义Step开发
 - Step开发应该继承类`com.merce.woven.flow.spark.flow.Step`
 ```java
