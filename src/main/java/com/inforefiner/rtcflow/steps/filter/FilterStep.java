@@ -3,17 +3,23 @@ package com.inforefiner.rtcflow.steps.filter;
 import com.inforefiner.rtcflow.util.ConvertUtil;
 import com.merce.woven.annotation.Setting;
 import com.merce.woven.annotation.StepBind;
+import com.merce.woven.common.FieldDesc;
+import com.merce.woven.common.StepFieldGroup;
 import com.merce.woven.flow.spark.flow.Step;
 import com.merce.woven.flow.spark.flow.StepSettings;
 import com.merce.woven.flow.spark.flow.StepValidateResult;
 import com.merce.woven.step.StepCategory;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.RichFilterFunction;
 import org.apache.flink.api.java.typeutils.RowTypeInfo;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.types.Row;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @StepBind(id = "rtc_filter", settingClass = FilterSettings.class)
 public class FilterStep extends Step<FilterSettings, DataStream<Row>> {
@@ -72,6 +78,20 @@ public class FilterStep extends Step<FilterSettings, DataStream<Row>> {
 
         //3. 将处理结果添加到输出，以便下游Step获取数据
         this.addOutput(filteredStream);
+    }
+
+    @Override
+    public StepFieldGroup fields() {
+        List<FieldDesc> inputFields = inputFields();
+        List<FieldDesc> outputFields = new ArrayList<>();
+        for (FieldDesc fieldDesc : inputFields) {
+            String alias = fieldDesc.getAlias();
+            String name = StringUtils.isNoneEmpty(alias) ? alias : fieldDesc.getName();
+            String type = fieldDesc.getType();
+            FieldDesc outputField = new FieldDesc(name, type, "");
+            outputFields.add(outputField);
+        }
+        return addOutputFields(outputFields);
     }
 
     /**

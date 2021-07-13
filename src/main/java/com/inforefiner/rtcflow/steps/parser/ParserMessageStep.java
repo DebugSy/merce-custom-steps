@@ -4,7 +4,9 @@ import com.inforefiner.rtcflow.util.ConvertUtil;
 import com.merce.woven.annotation.SelectType;
 import com.merce.woven.annotation.Setting;
 import com.merce.woven.annotation.StepBind;
+import com.merce.woven.common.FieldDesc;
 import com.merce.woven.common.SchemaMiniDesc;
+import com.merce.woven.common.StepFieldGroup;
 import com.merce.woven.flow.spark.flow.Step;
 import com.merce.woven.flow.spark.flow.StepSettings;
 import com.merce.woven.step.StepCategory;
@@ -14,6 +16,8 @@ import org.apache.flink.api.java.typeutils.RowTypeInfo;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.types.Row;
+
+import java.util.List;
 
 @StepBind(id = "rtc_parserMessage", settingClass = ParserMessageSettings.class)
 public class ParserMessageStep extends Step<ParserMessageSettings, DataStream<Row>> {
@@ -29,16 +33,19 @@ public class ParserMessageStep extends Step<ParserMessageSettings, DataStream<Ro
         this.xtype = "ParserMessageStep";
     }
 
+    @Override
     public ParserMessageSettings initSettings() {
         return new ParserMessageSettings();
     }
 
+    @Override
     public void setup() {
         this.schema = settings.getSchema();
         this.rowTypeInfo = ConvertUtil.buildRowTypeInfo(schema.getFields());
         this.parserMessageFunction = new ParserMessageFunction(rowTypeInfo, settings);
     }
 
+    @Override
     public void process() {
         DataStream<Row> input = this.input();
         SingleOutputStreamOperator<Row> result = input
@@ -47,6 +54,13 @@ public class ParserMessageStep extends Step<ParserMessageSettings, DataStream<Ro
                 .setParallelism(settings.getParallelism())
                 .uid(this.id);
         this.addOutput(result);
+    }
+
+    @Override
+    public StepFieldGroup fields() {
+        SchemaMiniDesc schema = settings.getSchema();
+        List<FieldDesc> fields = schema.getFields();
+        return this.addOutputFields(fields);
     }
 }
 

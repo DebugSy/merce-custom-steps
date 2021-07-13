@@ -69,6 +69,11 @@ public class FilterStep extends Step<FilterSettings, DataStream<Row>> {
     }
 
     @Override
+    public StepFieldGroup fields() {
+        //输出字段
+    }
+
+    @Override
     public StepValidateResult validate() {
         //校验
     }
